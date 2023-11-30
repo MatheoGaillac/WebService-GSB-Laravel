@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\dao\ServiceLogin;
+use App\Exceptions\MonException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ControllerLogin extends Controller
 {
@@ -26,6 +28,21 @@ class ControllerLogin extends Controller
         } catch (MonException $e){
             $erreur = $e->getMessage();
             return response()->json($erreur);
+        }
+    }
+
+    public function updatePassword($pwd){
+        $newpwd = Hash::make($pwd);
+        try {
+            $unLogin = new ServiceLogin();
+            $unLogin->miseAjourMotPasse($newpwd);
+            return view('/');
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return view('Error', compact('erreur'));
+        } catch (Exception $e){
+            $erreur = $e->getMessage();
+            return view('Error', compact('erreur'));
         }
     }
 }

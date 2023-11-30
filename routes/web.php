@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/updatePassword/{pwd}', [\App\Http\Controllers\ControllerLogin::class, 'updatePassword']);

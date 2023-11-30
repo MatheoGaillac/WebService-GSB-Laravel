@@ -29,4 +29,14 @@ class ServiceLogin
         }
         return $response;
     }
+
+    public function miseAjourMotPasse($pwd){
+        try{
+            Visiteur::query()->update([
+                'pwd_visiteur' => $pwd,
+            ]);
+        } catch (QueryException $e){
+            throw new MonException($e->getMessage());
+        }
+    }
 }
