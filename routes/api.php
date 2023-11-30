@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/getListeFrais/{id_visiteur}', [App\Http\Controllers\FraisController::class, "getFraisVisiteur"]);
 Route::post('/getConnexion', [App\Http\Controllers\ControllerLogin::class, 'signIn']);
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
