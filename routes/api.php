@@ -30,4 +30,5 @@ Route::prefix('frais')->group(function () {
 });
 Route::prefix('visiteur')->group(function () {
     Route::get('getVisiteurVille/{ville_visiteur}', 'App\Http\Controllers\VisiteurController@getVisiteurVille');
+    Route::get('getVisiteurNom/{nom}', 'App\Http\Controllers\VisiteurController@getVisiteurNom');
 });

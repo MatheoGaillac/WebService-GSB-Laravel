@@ -18,4 +18,15 @@ class VisiteurController extends Controller
             return response()->json($erreur, 204);
         }
     }
+
+    public function getVisiteurNom($nom){
+        try{
+            $unService = new ServiceVisiteur();
+            $response = $unService->getVisiteurNom($nom);
+            return response()->json($response);
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
 }
