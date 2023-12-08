@@ -18,6 +18,10 @@ use App\Http\Controllers\FraisController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/getListeFrais/{id_visiteur}', [App\Http\Controllers\FraisController::class, "getFraisVisiteur"]);
 Route::post('/getConnexion', [App\Http\Controllers\ControllerLogin::class, 'signIn']);
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+
+Route::prefix('frais')->group(function () {
+    Route::get('getFrais/{id_visiteur}', 'App\Http\Controllers\FraisController@getFraisVisiteur');
+    Route::post('addFrais', 'App\Http\Controllers\FraisController@addFrais');
+});
