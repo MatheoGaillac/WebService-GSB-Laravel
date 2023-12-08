@@ -25,4 +25,5 @@ Route::prefix('frais')->group(function () {
     Route::get('getFrais/{id_visiteur}', 'App\Http\Controllers\FraisController@getFraisVisiteur');
     Route::post('addFrais', 'App\Http\Controllers\FraisController@addFrais');
     Route::post('updateFrais', 'App\Http\Controllers\FraisController@updateFrais');
+    Route::post('deleteFrais', 'App\Http\Controllers\FraisController@deleteFrais');
 });

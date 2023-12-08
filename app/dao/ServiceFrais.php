@@ -34,4 +34,9 @@ class ServiceFrais
         $frais->save();
         return response()->json(['statuts' => "Modification réalisée"], 200);
     }
+
+    function deleteFrais($id_frais){
+        Frais::destroy($id_frais);
+        return response()->json(['statuts' => "Suppression réalisée"], 200);
+    }
 }
