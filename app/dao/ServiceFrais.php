@@ -20,7 +20,18 @@ class ServiceFrais
         $frais->id_visiteur = $idVisiteur;
         $frais->id_etat = $etat;
         $frais->save();
-        return response()->json($frais);
+        return response()->json(['statuts' => "Insertion réalisée"], 200);
     }
 
+    function updateFrais($idfrais, $anneeMois, $dateModification, $montanValide, $nbJustificatifs, $idVisiteur, $etat){
+        $frais = Frais::find($idfrais);
+        $frais->anneemois = $anneeMois;
+        $frais->datemodification = $dateModification;
+        $frais->montantvalide = $montanValide;
+        $frais->nbjustificatifs = $nbJustificatifs;
+        $frais->id_visiteur = $idVisiteur;
+        $frais->id_etat = $etat;
+        $frais->save();
+        return response()->json(['statuts' => "Modification réalisée"], 200);
+    }
 }
