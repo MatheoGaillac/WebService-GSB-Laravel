@@ -16,6 +16,10 @@ class ServiceVisiteur
         return response()->json(Visiteur::where('nom_visiteur', 'LIKE', $nom)->get());
     }
 
+    function getVisiteurSansFrais(){
+        return response()->json(Visiteur::doesntHave('frais')->get());
+    }
+
     function addVisiteur($id_laboratoire, $id_secteur, $nom_visiteur, $prenom_visiteur, $adresse_visiteur, $cp_visiteur, $ville_visiteur, $date_embauche, $login_visiteur, $pwd_visiteur, $type_visiteur){
         $visiteur = new Visiteur();
         $visiteur->id_laboratoire = $id_laboratoire;

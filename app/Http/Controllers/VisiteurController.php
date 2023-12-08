@@ -30,6 +30,17 @@ class VisiteurController extends Controller
         }
     }
 
+    public function getVisiteurSansFrais(){
+        try{
+            $unService = new ServiceVisiteur();
+            $response = $unService->getVisiteurSansFrais();
+            return response()->json($response);
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
     public function addVisiteur(){
         try {
             $json = file_get_contents('php://input');

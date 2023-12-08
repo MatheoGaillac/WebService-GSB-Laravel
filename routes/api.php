@@ -34,4 +34,5 @@ Route::prefix('visiteur')->group(function () {
     Route::get('getVisiteurNom/{nom}', 'App\Http\Controllers\VisiteurController@getVisiteurNom');
     Route::post('addVisiteur', 'App\Http\Controllers\VisiteurController@addVisiteur');
     Route::post('updateVisiteur', 'App\Http\Controllers\VisiteurController@updateVisiteur');
+    Route::get('getVisiteurSansFrais', 'App\Http\Controllers\VisiteurController@getVisiteurSansFrais');
 });
