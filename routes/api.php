@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FraisController;
+use App\Http\Controllers\VisiteurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,7 @@ Route::prefix('frais')->group(function () {
     Route::post('addFrais', 'App\Http\Controllers\FraisController@addFrais');
     Route::post('updateFrais', 'App\Http\Controllers\FraisController@updateFrais');
     Route::post('deleteFrais', 'App\Http\Controllers\FraisController@deleteFrais');
+});
+Route::prefix('visiteur')->group(function () {
+    Route::get('getVisiteurVille/{ville_visiteur}', 'App\Http\Controllers\VisiteurController@getVisiteurVille');
 });
