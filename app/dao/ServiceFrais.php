@@ -39,4 +39,9 @@ class ServiceFrais
         Frais::destroy($id_frais);
         return response()->json(['statuts' => "Suppression réalisée"], 200);
     }
+
+    function getFraisMois($mois){
+        $mois = '%-' . $mois;
+        return response()->json(Frais::where('anneemois', 'LIKE', $mois)->get());
+    }
 }
