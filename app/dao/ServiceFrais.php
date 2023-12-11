@@ -3,6 +3,7 @@
 namespace App\dao;
 
 use App\Models\Frais;
+use App\Models\Fraishorsforfait;
 use App\Models\Visiteur;
 
 class ServiceFrais
@@ -43,5 +44,14 @@ class ServiceFrais
     function getFraisMois($mois){
         $mois = '%-' . $mois;
         return response()->json(Frais::where('anneemois', 'LIKE', $mois)->get());
+    }
+
+    function getSumFraisMois($mois){
+        $mois = '%-' . $mois;
+        return response()->json(Frais::where('anneemois', 'LIKE', $mois)->sum('montantvalide'));
+    }
+
+    function getNbHFParFrais($id_frais){
+        return response()->json(Fraishorsforfait::where('id_frais', '=', $id_frais)->count('id_fraishorsforfait'));
     }
 }

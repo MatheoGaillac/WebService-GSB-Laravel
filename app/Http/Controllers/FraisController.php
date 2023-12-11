@@ -92,4 +92,26 @@ class FraisController extends Controller
             return response()->json($erreur, 201);
         }
     }
+
+    public function getSumFraisMois($mois){
+        try{
+            $unService = new ServiceFrais();
+            $response = $unService->getSumFraisMois($mois);
+            return response()->json($response);
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
+
+    public function getNbHFParFrais($id_frais){
+        try{
+            $unService = new ServiceFrais();
+            $response = $unService->getNbHFParFrais($id_frais);
+            return response()->json($response);
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
 }

@@ -25,6 +25,9 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::prefix('frais')->group(function () {
     Route::get('getFrais/{id_visiteur}', 'App\Http\Controllers\FraisController@getFraisVisiteur');
     Route::get('getFraisMois/{mois}', 'App\Http\Controllers\FraisController@getFraisMois');
+    Route::get('getSumFraisMois/{mois}', 'App\Http\Controllers\FraisController@getSumFraisMois');
+    Route::get('getSumFraisMois/{mois}', 'App\Http\Controllers\FraisController@getSumFraisMois');
+    Route::get('getNbHFParFrais/{id_frais}', 'App\Http\Controllers\FraisController@getNbHFParFrais');
     Route::post('addFrais', 'App\Http\Controllers\FraisController@addFrais');
     Route::post('updateFrais', 'App\Http\Controllers\FraisController@updateFrais');
     Route::post('deleteFrais', 'App\Http\Controllers\FraisController@deleteFrais');
