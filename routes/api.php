@@ -19,8 +19,8 @@ use App\Http\Controllers\VisiteurController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/getConnexion', [App\Http\Controllers\ControllerLogin::class, 'signIn']);
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::prefix('frais')->group(function () {
     Route::get('getFrais/{id_visiteur}', 'App\Http\Controllers\FraisController@getFraisVisiteur');
