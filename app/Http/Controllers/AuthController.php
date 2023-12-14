@@ -14,26 +14,26 @@ class AuthController extends Controller
         // Vérifiez si la requête est en JSON
         if ($request->isJson()) {
             $data = $request->json()->all();
-            // Validation des données reçues, il faut un email et un password
+            // Validation des données reçues, il faut un login et un password
             $request->validate([
-                'email' => 'required|email',
+                'login' => 'required',
                 'password' => 'required',
             ]);
             // Correspondance pour la validation des données
-            $credentials = ['email' => $data['email'], 'password' => $data['password']];
+            $credentials = ['login_visiteur' => $data['login'], 'password' =>
+                $data['password']];
             // Auth valide que l'email et le password existe dans la table users
             if (!Auth::attempt($credentials)) {
-                return response()->json(['error' => 'The provided credentials are incorrect.'], 401);
+                return response()->json(['error' => 'The provided credentials are
+incorrect.'], 401);
             }
             // on récupère les infos du user
-            $user = User::where('email', $data['email'])->first();
-
+            $visiteur = $request->user();
             // Création et sauvegarde du token user
-            $token = $user->createToken('auth_token')->plainTextToken;
-            $user->remember_token = $token;
-            $user->save();
-            // On récupère le visiteur (même id que user)
-            $visiteur = Visiteur::find($user->id);;
+            $tokenResult2 = $visiteur->createToken('Personal Access Token');
+            $token = $tokenResult2->plainTextToken;
+            $visiteur->remember_token = $token;
+            $visiteur->save();
             // On retourne un JSON pour Angular
             return response()->json([
                 'visiteur' => [
@@ -50,4 +50,12 @@ class AuthController extends Controller
         return response()->json(['error' => 'Request must be JSON.'], 415);
     }
 
+    public function logout(Request $request){
+        $visiteur = $request->user();
+        $visiteur->tokens()->delete();
+
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
+    }
 }
