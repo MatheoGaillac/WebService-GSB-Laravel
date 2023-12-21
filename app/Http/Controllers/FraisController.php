@@ -16,7 +16,7 @@ class FraisController extends Controller
         try{
             $unService = new ServiceFrais();
             $response = $unService->getFraisVisiteur($id_visiteur);
-            return response()->json($response);
+            return $response;
         } catch (MonException $e){
             $erreur = $e->getMessage();
             return response()->json($erreur, 204);

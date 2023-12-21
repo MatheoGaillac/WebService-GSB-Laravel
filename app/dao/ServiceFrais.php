@@ -9,7 +9,7 @@ use App\Models\Visiteur;
 class ServiceFrais
 {
     function getFraisVisiteur($id_visiteur){
-        return response()->json(Visiteur::find($id_visiteur)->Frais()->get());
+        return response()->json(Visiteur::find($id_visiteur)->Frais()->join('etat', 'frais.id_etat', '=', 'etat.id_etat')->get());
     }
 
     function addFrais($anneeMois, $dateModification, $montanValide, $nbJustificatifs, $idVisiteur, $etat){
