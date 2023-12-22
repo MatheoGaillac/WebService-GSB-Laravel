@@ -18,7 +18,8 @@ class ServiceFrais
     }
 
     function getEtats(){
-        return response()->json(Etat::all());
+        $fraisData = Etat::all();
+        return response()->json($fraisData);
     }
 
     function addFrais($anneeMois, $dateModification, $montanValide, $nbJustificatifs, $idVisiteur, $etat){
