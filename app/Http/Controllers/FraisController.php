@@ -23,6 +23,17 @@ class FraisController extends Controller
         }
     }
 
+    public function getUnFrais($id_frais){
+        try{
+            $unService = new ServiceFrais();
+            $response = $unService->getUnFrais($id_frais);
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
     public function getFraisMois($mois){
         try{
             $unService = new ServiceFrais();

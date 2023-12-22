@@ -24,6 +24,7 @@ Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->
 
 Route::prefix('frais')->group(function () {
     Route::get('getFrais/{id_visiteur}', 'App\Http\Controllers\FraisController@getFraisVisiteur');
+    Route::get('getUnFrais/{id_frais}', 'App\Http\Controllers\FraisController@getUnFrais');
     Route::get('getFraisMois/{mois}', 'App\Http\Controllers\FraisController@getFraisMois');
     Route::get('getSumFraisMois/{mois}', 'App\Http\Controllers\FraisController@getSumFraisMois');
     Route::get('getSumFraisMois/{mois}', 'App\Http\Controllers\FraisController@getSumFraisMois');

@@ -12,6 +12,10 @@ class ServiceFrais
         return response()->json(Visiteur::find($id_visiteur)->Frais()->join('etat', 'frais.id_etat', '=', 'etat.id_etat')->get());
     }
 
+    function getUnFrais($id_frais){
+        return response()->json(Frais::where('id_frais', '=', $id_frais)->join('etat', 'frais.id_etat', '=', 'etat.id_etat')->first());
+    }
+
     function addFrais($anneeMois, $dateModification, $montanValide, $nbJustificatifs, $idVisiteur, $etat){
         $frais = new Frais();
         $frais->anneemois = $anneeMois;
