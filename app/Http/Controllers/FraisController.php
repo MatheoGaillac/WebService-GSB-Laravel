@@ -34,6 +34,17 @@ class FraisController extends Controller
         }
     }
 
+    public function getEtats(){
+        try{
+            $unService = new ServiceFrais();
+            $response = $unService->getEtats();
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
     public function getFraisMois($mois){
         try{
             $unService = new ServiceFrais();

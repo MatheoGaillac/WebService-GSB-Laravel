@@ -2,6 +2,7 @@
 
 namespace App\dao;
 
+use App\Models\Etat;
 use App\Models\Frais;
 use App\Models\Fraishorsforfait;
 use App\Models\Visiteur;
@@ -14,6 +15,10 @@ class ServiceFrais
 
     function getUnFrais($id_frais){
         return response()->json(Frais::where('id_frais', '=', $id_frais)->join('etat', 'frais.id_etat', '=', 'etat.id_etat')->first());
+    }
+
+    function getEtats(){
+        return response()->json(Etat::all());
     }
 
     function addFrais($anneeMois, $dateModification, $montanValide, $nbJustificatifs, $idVisiteur, $etat){
