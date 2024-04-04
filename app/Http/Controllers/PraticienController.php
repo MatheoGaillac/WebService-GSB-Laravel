@@ -48,4 +48,23 @@ class PraticienController extends Controller
         }
     }
 
+    public function updateInvitation(){
+        try {
+            $json = file_get_contents('php://input');
+            $inviterJson = json_decode($json);
+            if ($inviterJson != null){
+                $id_activite_compl = $inviterJson->id_activite_compl;
+                $id_praticien = $inviterJson->id_praticien;
+                $old_id_activite_compl = $inviterJson->old_id_activite_compl;
+                $unService = new ServicePraticien();
+                $response = $unService->updateInvitation($id_activite_compl, $id_praticien, $old_id_activite_compl);
+                return response()->json($response);
+            }
+        }  catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
+
+
 }

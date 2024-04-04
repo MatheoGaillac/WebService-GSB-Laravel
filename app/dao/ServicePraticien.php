@@ -26,4 +26,16 @@ class ServicePraticien
         $inviter->save();
         return response()->json(['statuts' => "Insertion réalisée"], 200);
     }
+
+    function updateInvitation($id_activite_compl, $id_praticien, $old_id_activite_compl)
+    {
+        $inviter = Inviter::where('id_praticien', $id_praticien)
+            ->where('id_activite_compl', $old_id_activite_compl)
+            ->update([
+                'id_praticien' => $id_praticien,
+                'id_activite_compl' => $id_activite_compl,
+                'specialiste' => ""
+            ]);
+        return response()->json(['status' => "Invitation modifiée avec succès", 200]);
+    }
 }
