@@ -41,3 +41,9 @@ Route::prefix('visiteur')->group(function () {
     Route::post('updateVisiteur', 'App\Http\Controllers\VisiteurController@updateVisiteur');
     Route::get('getVisiteurSansFrais', 'App\Http\Controllers\VisiteurController@getVisiteurSansFrais');
 });
+
+Route::prefix('praticien')->group(function () {
+    Route::get('getPraticienByNom/{nom_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByNom');
+    Route::get('getPraticienByType/{id_type_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByType');
+    Route::post('addInvitation', 'App\Http\Controllers\PraticienController@addInvitation');
+});
