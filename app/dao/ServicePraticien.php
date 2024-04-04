@@ -38,4 +38,11 @@ class ServicePraticien
             ]);
         return response()->json(['status' => "Invitation modifiée avec succès", 200]);
     }
+
+    function deleteInvitation($id_activite_compl, $id_praticien){
+        Inviter::where('id_activite_compl', $id_activite_compl)
+            ->where('id_praticien', $id_praticien)
+            ->delete();
+        return response()->json(['status' => "Suppression réalisée"], 200);
+    }
 }

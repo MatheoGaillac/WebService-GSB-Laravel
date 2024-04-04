@@ -47,4 +47,5 @@ Route::prefix('praticien')->group(function () {
     Route::get('getPraticienByType/{id_type_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByType');
     Route::post('addInvitation', 'App\Http\Controllers\PraticienController@addInvitation');
     Route::post('updateInvitation', 'App\Http\Controllers\PraticienController@updateInvitation');
+    Route::post('deleteInvitation', 'App\Http\Controllers\PraticienController@deleteInvitation');
 });
