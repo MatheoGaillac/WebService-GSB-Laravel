@@ -17,6 +17,28 @@ class ServicePraticien
         return response()->json(Praticien::where('praticien.id_type_praticien', '=', $id_type_praticien)->join('type_praticien', 'praticien.id_type_praticien', '=', 'type_praticien.id_type_praticien')->get());
     }
 
+    public function searchPraticiens($critere = null)
+    {
+        try {
+            $query = Praticien::query();
+
+            if ($critere !== null) {
+                $query->where('nom_praticien', 'LIKE', "%$critere%")
+                    ->orWhereHas('type_praticien', function ($query) use ($critere) {
+                        $query->where('lib_type_praticien', 'LIKE', "%$critere%");
+                    });
+            }
+
+            $praticiens = $query->get();
+
+            return response()->json($praticiens);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+
+
     function addInvitation($id_activite_compl, $id_praticien, $specialiste)
     {
         $inviter = new Inviter();

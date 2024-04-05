@@ -30,6 +30,20 @@ class PraticienController extends Controller
         }
     }
 
+    public function search($critere)
+    {
+        $servicePraticien = new ServicePraticien();
+
+        try {
+            $praticiens = $servicePraticien->searchPraticiens($critere);
+
+            return response()->json($praticiens);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
     public function addInvitation(){
         try {
             $json = file_get_contents('php://input');
