@@ -30,7 +30,7 @@ class PraticienController extends Controller
         }
     }
 
-    public function search($critere)
+    public function search($critere = null)
     {
         $servicePraticien = new ServicePraticien();
 
