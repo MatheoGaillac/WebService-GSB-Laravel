@@ -23,7 +23,7 @@ class ServicePraticien
             $query = Praticien::query();
 
             if ($critere !== null) {
-                $query->where('nom_praticien', 'LIKE', "%$critere%")
+                $query->where('nom_praticien', 'LIKE', "$critere%")
                     ->orWhereHas('type_praticien', function ($query) use ($critere) {
                         $query->where('lib_type_praticien', 'LIKE', "%$critere%");
                     });

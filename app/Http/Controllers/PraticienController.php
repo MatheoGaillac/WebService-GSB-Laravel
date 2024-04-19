@@ -37,7 +37,7 @@ class PraticienController extends Controller
         try {
             $praticiens = $servicePraticien->searchPraticiens($critere);
 
-            return response()->json($praticiens);
+            return $praticiens;
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
