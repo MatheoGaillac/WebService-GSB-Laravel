@@ -19,6 +19,17 @@ class PraticienController extends Controller
         }
     }
 
+    public function getPraticienByID($id_praticien){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getPraticienByID($id_praticien);
+            return response()->json($response);
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
+
     public function getPraticienByType($id_type_praticien){
         try{
             $unService = new ServicePraticien();

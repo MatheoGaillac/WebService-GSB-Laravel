@@ -12,6 +12,11 @@ class ServicePraticien
         return response()->json(Praticien::where('nom_praticien', '=', $nom_praticien)->get());
     }
 
+    function getPraticienByID($id_praticien)
+    {
+        return response()->json(Praticien::where('id_praticien', '=', $id_praticien)->get());
+    }
+
     function getPraticienByType($id_type_praticien)
     {
         return response()->json(Praticien::where('praticien.id_type_praticien', '=', $id_type_praticien)->join('type_praticien', 'praticien.id_type_praticien', '=', 'type_praticien.id_type_praticien')->get());
@@ -20,7 +25,7 @@ class ServicePraticien
     public function searchPraticiens($critere = null)
     {
         try {
-            $query = Praticien::query();
+            $query = Praticien::query()->with('type_praticien');
 
             if ($critere !== null) {
                 $query->where('nom_praticien', 'LIKE', "$critere%")

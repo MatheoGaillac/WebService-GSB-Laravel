@@ -44,6 +44,7 @@ Route::prefix('visiteur')->group(function () {
 
 Route::prefix('praticien')->group(function () {
     Route::get('getPraticienByNom/{nom_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByNom');
+    Route::get('getPraticienByID/{id_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByID');
     Route::get('getPraticienByType/{id_type_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByType');
     Route::get('getPraticien/{critere?}', 'App\Http\Controllers\PraticienController@search');
     Route::post('addInvitation', 'App\Http\Controllers\PraticienController@addInvitation');
