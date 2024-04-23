@@ -47,7 +47,9 @@ class ServicePraticien
         }
     }
 
-
+    function getUneInvitation($id_praticien, $id_activite_compl){
+        return response()->json(Inviter::where('id_praticien', '=', $id_praticien)->where('id_activite_compl', '=', $id_activite_compl)->first());
+    }
 
     function addInvitation($id_activite_compl, $id_praticien, $specialiste)
     {

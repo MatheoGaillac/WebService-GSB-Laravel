@@ -65,6 +65,16 @@ class PraticienController extends Controller
         }
     }
 
+    public function getUneInvitation($id_praticien, $id_activite_compl){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getUneInvitation($id_praticien, $id_activite_compl);
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
 
     public function addInvitation(){
         try {
