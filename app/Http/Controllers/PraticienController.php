@@ -30,6 +30,17 @@ class PraticienController extends Controller
         }
     }
 
+    public function getInvitationPraticien($id_praticien){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getInvitationPraticien($id_praticien);
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
     public function getPraticienByType($id_type_praticien){
         try{
             $unService = new ServicePraticien();

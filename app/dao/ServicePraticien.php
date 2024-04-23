@@ -17,6 +17,11 @@ class ServicePraticien
         return response()->json(Praticien::where('id_praticien', '=', $id_praticien)->first());
     }
 
+    function getInvitationPraticien($id_praticien)
+    {
+        return response()->json(Inviter::where('inviter.id_praticien', '=', $id_praticien)->join('activite_compl', 'inviter.id_activite_compl', '=', 'activite_compl.id_activite_compl')->get());
+    }
+
     function getPraticienByType($id_type_praticien)
     {
         return response()->json(Praticien::where('praticien.id_type_praticien', '=', $id_type_praticien)->join('type_praticien', 'praticien.id_type_praticien', '=', 'type_praticien.id_type_praticien')->get());
