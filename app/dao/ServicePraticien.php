@@ -14,7 +14,7 @@ class ServicePraticien
 
     function getPraticienByID($id_praticien)
     {
-        return response()->json(Praticien::where('id_praticien', '=', $id_praticien)->get());
+        return response()->json(Praticien::where('id_praticien', '=', $id_praticien)->first());
     }
 
     function getPraticienByType($id_type_praticien)
