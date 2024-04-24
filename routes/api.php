@@ -43,13 +43,12 @@ Route::prefix('visiteur')->group(function () {
 });
 
 Route::prefix('praticien')->group(function () {
-    Route::get('getPraticienByNom/{nom_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByNom');
     Route::get('getPraticienByID/{id_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByID');
     Route::get('getInvitationPraticien/{id_praticien}', 'App\Http\Controllers\PraticienController@getInvitationPraticien');
-    Route::get('getPraticienByType/{id_type_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByType');
     Route::get('getPraticien/{critere?}', 'App\Http\Controllers\PraticienController@search');
     Route::get('getUneInvitation/{id_praticien}/{id_activite_compl}', 'App\Http\Controllers\PraticienController@getUneInvitation');
     Route::get('getActiviteCompl', 'App\Http\Controllers\PraticienController@getActiviteCompl');
+    Route::get('getAllPraticiens', 'App\Http\Controllers\PraticienController@getAllPraticiens');
     Route::post('addInvitation', 'App\Http\Controllers\PraticienController@addInvitation');
     Route::post('updateInvitation', 'App\Http\Controllers\PraticienController@updateInvitation');
     Route::post('deleteInvitation', 'App\Http\Controllers\PraticienController@deleteInvitation');

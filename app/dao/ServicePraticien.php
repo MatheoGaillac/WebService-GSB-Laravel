@@ -8,11 +8,6 @@ use App\Models\Praticien;
 
 class ServicePraticien
 {
-    function getPraticienByNom($nom_praticien)
-    {
-        return response()->json(Praticien::where('nom_praticien', '=', $nom_praticien)->get());
-    }
-
     function getPraticienByID($id_praticien)
     {
         return response()->json(Praticien::where('id_praticien', '=', $id_praticien)->first());
@@ -23,15 +18,20 @@ class ServicePraticien
         return response()->json(Inviter::where('inviter.id_praticien', '=', $id_praticien)->join('activite_compl', 'inviter.id_activite_compl', '=', 'activite_compl.id_activite_compl')->get());
     }
 
-    function getPraticienByType($id_type_praticien)
-    {
-        return response()->json(Praticien::where('praticien.id_type_praticien', '=', $id_type_praticien)->join('type_praticien', 'praticien.id_type_praticien', '=', 'type_praticien.id_type_praticien')->get());
-    }
-
     function getActiviteCompl(){
         $activiteData = ActiviteCompl::all();
         return response()->json($activiteData);
     }
+
+    function getAllPraticiens(){
+        $praticienData = Praticien::all();
+        return response()->json($praticienData);
+    }
+
+    function getUneInvitation($id_praticien, $id_activite_compl){
+        return response()->json(Inviter::where('id_praticien', '=', $id_praticien)->where('id_activite_compl', '=', $id_activite_compl)->with('praticien')->first());
+    }
+
     public function searchPraticiens($critere = null)
     {
         try {
@@ -50,10 +50,6 @@ class ServicePraticien
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }
-    }
-
-    function getUneInvitation($id_praticien, $id_activite_compl){
-        return response()->json(Inviter::where('id_praticien', '=', $id_praticien)->where('id_activite_compl', '=', $id_activite_compl)->with('praticien')->first());
     }
 
     function addInvitation($id_activite_compl, $id_praticien, $specialiste)
