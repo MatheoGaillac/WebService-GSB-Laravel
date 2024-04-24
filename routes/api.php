@@ -49,6 +49,7 @@ Route::prefix('praticien')->group(function () {
     Route::get('getPraticienByType/{id_type_praticien}', 'App\Http\Controllers\PraticienController@getPraticienByType');
     Route::get('getPraticien/{critere?}', 'App\Http\Controllers\PraticienController@search');
     Route::get('getUneInvitation/{id_praticien}/{id_activite_compl}', 'App\Http\Controllers\PraticienController@getUneInvitation');
+    Route::get('getActiviteCompl', 'App\Http\Controllers\PraticienController@getActiviteCompl');
     Route::post('addInvitation', 'App\Http\Controllers\PraticienController@addInvitation');
     Route::post('updateInvitation', 'App\Http\Controllers\PraticienController@updateInvitation');
     Route::post('deleteInvitation', 'App\Http\Controllers\PraticienController@deleteInvitation');

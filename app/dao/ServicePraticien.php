@@ -2,6 +2,7 @@
 
 namespace App\dao;
 
+use App\Models\ActiviteCompl;
 use App\Models\Inviter;
 use App\Models\Praticien;
 
@@ -27,6 +28,11 @@ class ServicePraticien
         return response()->json(Praticien::where('praticien.id_type_praticien', '=', $id_type_praticien)->join('type_praticien', 'praticien.id_type_praticien', '=', 'type_praticien.id_type_praticien')->get());
     }
 
+    function getActiviteCompl(){
+        $fraisData = ActiviteCompl::all();
+        return response()->json($fraisData);
+    }
+
     public function searchPraticiens($critere = null)
     {
         try {
@@ -48,7 +54,7 @@ class ServicePraticien
     }
 
     function getUneInvitation($id_praticien, $id_activite_compl){
-        return response()->json(Inviter::where('id_praticien', '=', $id_praticien)->where('id_activite_compl', '=', $id_activite_compl)->first());
+        return response()->json(Inviter::where('id_praticien', '=', $id_praticien)->where('id_activite_compl', '=', $id_activite_compl)->with('praticien')->first());
     }
 
     function addInvitation($id_activite_compl, $id_praticien, $specialiste)

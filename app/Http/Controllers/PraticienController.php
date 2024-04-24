@@ -76,6 +76,17 @@ class PraticienController extends Controller
         }
     }
 
+    public function getActiviteCompl(){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getActiviteCompl();
+            return response()->json($response);
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
+
     public function addInvitation(){
         try {
             $json = file_get_contents('php://input');
