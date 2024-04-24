@@ -29,10 +29,9 @@ class ServicePraticien
     }
 
     function getActiviteCompl(){
-        $fraisData = ActiviteCompl::all();
-        return response()->json($fraisData);
+        $activiteData = ActiviteCompl::all();
+        return response()->json($activiteData);
     }
-
     public function searchPraticiens($critere = null)
     {
         try {
