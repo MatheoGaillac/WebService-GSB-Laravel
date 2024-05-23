@@ -5,6 +5,7 @@ namespace App\dao;
 use App\Models\ActiviteCompl;
 use App\Models\Inviter;
 use App\Models\Praticien;
+use App\Models\Specialite;
 
 class ServicePraticien
 {
@@ -13,26 +14,49 @@ class ServicePraticien
         return response()->json(Praticien::where('id_praticien', '=', $id_praticien)->first());
     }
 
+    function getAllSpecialites()
+    {
+        return response()->json(Specialite::all());
+    }
+
+    function getVille()
+    {
+        return response()->json(Praticien::select('cp_praticien', 'ville_praticien')->get());
+    }
+
+
+    function getPraticienCriteres($code_postal, $id_specialite)
+    {
+        return response()->json(Praticien::join('posseder', 'praticien.id_praticien', '=', 'posseder.id_praticien')
+            ->where('posseder.id_specialite', '=', $id_specialite)
+            ->where('praticien.cp_praticien', '=', $code_postal)
+            ->get());
+    }
+
     function getInvitationPraticien($id_praticien)
     {
         return response()->json(Inviter::where('inviter.id_praticien', '=', $id_praticien)->join('activite_compl', 'inviter.id_activite_compl', '=', 'activite_compl.id_activite_compl')->get());
     }
 
-    function getActiviteCompl(){
+    function getActiviteCompl()
+    {
         $activiteData = ActiviteCompl::all();
         return response()->json($activiteData);
     }
 
-    function getAllPraticiens(){
+    function getAllPraticiens()
+    {
         $praticienData = Praticien::all();
         return response()->json($praticienData);
     }
 
-    function getUneInvitation($id_praticien, $id_activite_compl){
+    function getUneInvitation($id_praticien, $id_activite_compl)
+    {
         return response()->json(Inviter::where('id_praticien', '=', $id_praticien)->where('id_activite_compl', '=', $id_activite_compl)->with('praticien')->first());
     }
 
-    public function searchPraticiens($critere = null)
+    public
+    function searchPraticiens($critere = null)
     {
         try {
             $query = Praticien::query()->with('type_praticien');
@@ -74,7 +98,8 @@ class ServicePraticien
         return response()->json(['status' => "Invitation modifiée avec succès", 200]);
     }
 
-    function deleteInvitation($id_activite_compl, $id_praticien){
+    function deleteInvitation($id_activite_compl, $id_praticien)
+    {
         Inviter::where('id_activite_compl', $id_activite_compl)
             ->where('id_praticien', $id_praticien)
             ->delete();

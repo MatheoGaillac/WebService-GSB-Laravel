@@ -41,10 +41,43 @@ class PraticienController extends Controller
         }
     }
 
+    public function getPraticienCriteres($code_postal, $id_specialite){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getPraticienCriteres($code_postal, $id_specialite);
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
     public function getActiviteCompl(){
         try{
             $unService = new ServicePraticien();
             $response = $unService->getActiviteCompl();
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
+    public function getSpecialites(){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getAllSpecialites();
+            return $response;
+        } catch (MonException $e){
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 204);
+        }
+    }
+
+    public function getVille(){
+        try{
+            $unService = new ServicePraticien();
+            $response = $unService->getVille();
             return $response;
         } catch (MonException $e){
             $erreur = $e->getMessage();
